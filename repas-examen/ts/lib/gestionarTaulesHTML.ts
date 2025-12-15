@@ -2,12 +2,38 @@ import { setAttributes } from "./gestionarElementsDOM.js";
 
 // GESTIONAR TAULES HTML
 /**
- * Funcio per crear una taula HTML
+ * Funcio per crear una taula HTML (th i td)
  * @param data Matriu de dades per a les files i columnes
  * @param attrs (opcional): Objecte amb els atributs i els seus valors per a la taula
  * @returns La taula HTML creada
  */
 export function createTable(
+  data: string[][],
+  attrs?: { [key: string]: string }
+): HTMLTableElement {
+  const table = document.createElement("table");
+  if (attrs) setAttributes(table, attrs);
+  const tbody = document.createElement("tbody");
+  data.forEach((rowData, rowIndex) => {
+    const tr = document.createElement("tr");
+    rowData.forEach(cellData => {
+      const cell = document.createElement(rowIndex === 0 ? "th" : "td");
+      cell.textContent = cellData;
+      tr.appendChild(cell);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  return table;
+}
+
+/**
+ * Funcio per crear una taula HTML (td)
+ * @param data Matriu de dades per a les files i columnes
+ * @param attrs (opcional): Objecte amb els atributs i els seus valors per a la taula
+ * @returns La taula HTML creada
+ */
+export function createTableWithoutTh(
   data: string[][],
   attrs?: { [key: string]: string }
 ): HTMLTableElement {

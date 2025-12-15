@@ -8,6 +8,12 @@ import {
   moveLast,
 } from "./lib/gestionarElementsDOM.js";
 
+import { 
+  createTable, 
+  fillCell, 
+  moveColumn 
+} from "./lib/gestionarTaulesHTML.js";
+
 // Crear un element de qualsevol tipus (<p>, <div>, <span>, <strong>, <em>, <ul>, <li>...) amb un text a dins (o un element qualsevol).
 createElementWithText("h1", "DOM Elements Practice");
 
@@ -56,3 +62,15 @@ parentDiv.appendChild(thirdParagraphMoved);
 moveBefore(secondParagraphMoved, firstParagraphMoved);
 moveAfter(thirdParagraphMoved, firstParagraphMoved);
 moveFirst(parentDiv, thirdParagraphMoved);
+
+// Crear una taula HTML, omplir cel·les i moure columnes
+const tableData = [
+  ["Name", "Age", "City"],
+  ["Alice", "30", "New York"],
+  ["Bob", "25", "Los Angeles"],
+  ["Charlie", "35", "Chicago"],
+];
+
+
+const table = createTable(tableData, { border: "1", style: "border-collapse: collapse; margin-top: 10px;" });
+document.body.appendChild(table);
